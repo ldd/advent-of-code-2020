@@ -2,15 +2,18 @@ defmodule AOC_2020Test do
   use ExUnit.Case
   doctest AOC_2020
 
-  test "Day 1 passes" do
-    raw_input = Mix.Tasks.Aoc2020.GenerateAnswer.get_raw_input(1)
-    assert AOC_2020.Day1.part1(raw_input) == 898_299
-    assert AOC_2020.Day1.part2(raw_input) == 143_933_922
-  end
+  import Mix.Tasks.Aoc2020.GenerateAnswer, only: [get_raw_input: 1, runner: 1]
 
-  test "Day 2 passes" do
-    raw_input = Mix.Tasks.Aoc2020.GenerateAnswer.get_raw_input(2)
-    assert AOC_2020.Day2.part1(raw_input) == 454
-    assert AOC_2020.Day2.part2(raw_input) == 649
-  end
+  @expected_results [{898_299, 143_933_922}, {454, 649}, {169, 7_560_370_818}]
+
+  @expected_results
+  |> Enum.with_index()
+  |> Enum.each(fn {{result1, result2}, day} ->
+    test "Day #{day} passes" do
+      raw_input = get_raw_input(unquote(day) + 1)
+      [part1, part2] = runner(unquote(day) + 1)
+      assert part1.(raw_input) == unquote(result1)
+      assert part2.(raw_input) == unquote(result2)
+    end
+  end)
 end
