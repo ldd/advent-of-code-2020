@@ -1,4 +1,6 @@
 defmodule AOC_2020.Day2 do
+  import AOC_2020.Utils
+
   defp parseMessage(s) do
     [rule, password] = s |> String.split(": ", trim: true)
     [range, letter] = rule |> String.split(" ")
@@ -13,8 +15,6 @@ defmodule AOC_2020.Day2 do
     v = Map.get(dic, letter, -1)
     v >= low and v <= high
   end
-
-  def valid_count(l, f), do: l |> Enum.filter(f) |> length
 
   def part1(raw_input) do
     valid_count(raw_input, &part1_filter/1)

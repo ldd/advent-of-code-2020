@@ -5,4 +5,6 @@ defmodule AOC_2020.Utils do
   # for each entry, attempt to find @sum - entry in the dictionary
   def hasSum(l, dic, sum),
     do: Enum.filter(l, &Map.has_key?(dic, sum - &1))
+
+  def valid_count(l, f), do: l |> Enum.filter(f) |> length
 end
