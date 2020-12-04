@@ -4,8 +4,7 @@ defmodule AOC_2020.Day3 do
   def count_trees(input, slope, rows) do
     input
     |> Enum.with_index()
-    |> Enum.filter(fn {_r, i} -> rem(i, rows) == 0 end)
-    |> Enum.map(fn {r, i} ->
+    |> Enum.map_every(rows, fn {r, i} ->
       location = rem(floor(i * slope), String.length(r))
       String.graphemes(r) |> Enum.at(location)
     end)

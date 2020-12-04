@@ -1,10 +1,10 @@
 defmodule Mix.Tasks.Aoc2020.GenerateAnswer do
   use Mix.Task
 
-  def get_raw_input(day) do
+  def get_raw_input(day, trim \\ "true") do
     case File.read("input/day#{day}.txt") do
       {:ok, rawInput} ->
-        rawInput |> String.split("\n", trim: true)
+        rawInput |> String.split("\n", trim: trim == "true")
 
       _ ->
         []
@@ -16,9 +16,11 @@ defmodule Mix.Tasks.Aoc2020.GenerateAnswer do
     [&module.part1/1, &module.part2/1]
   end
 
-  def run(day) do
+  def run(args) do
+    day = Enum.at(args, 0)
+    trim = Enum.at(args, 1)
     [f, g] = runner(day)
-    input = get_raw_input(day)
+    input = get_raw_input(day, trim)
     result = [f.(input), g.(input)]
     IO.inspect(result)
   end
