@@ -4,7 +4,13 @@ defmodule AOC_2020Test do
 
   import Mix.Tasks.Aoc2020.GenerateAnswer, only: [get_raw_input: 2, runner: 1]
 
-  @expected_results [{898_299, 143_933_922}, {454, 649}, {169, 7_560_370_818}, {210, 131}]
+  @expected_results [
+    {898_299, 143_933_922},
+    {454, 649},
+    {169, 7_560_370_818},
+    {210, 131},
+    {871, 640}
+  ]
   @trimmed_days %{4 => true}
 
   @expected_results
