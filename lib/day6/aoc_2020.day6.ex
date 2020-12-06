@@ -1,23 +1,32 @@
 defmodule AOC_2020.Day6 do
-  defp helper(l) do
+  defp group_by_empty_line(l) do
     l
     |> Enum.chunk_by(&(&1 == ""))
     |> Enum.filter(&(&1 != [""]))
-    |> Enum.map(&{Enum.count(&1), Enum.join(&1) |> String.graphemes() |> Enum.frequencies()})
+  end
+
+  defp get_count_frequency(l) do
+    l
+    |> group_by_empty_line()
+    |> Enum.map(
+      &(Enum.join(&1)
+        |> String.graphemes()
+        |> Enum.frequencies()
+        |> Enum.map(fn {_k, v} -> v == Enum.count(&1) end))
+    )
   end
 
   def part1(input) do
     input
-    |> helper()
-    |> Enum.map(&(Map.keys(elem(&1, 1)) |> Enum.count()))
+    |> get_count_frequency()
+    |> Enum.map(&Enum.count(&1))
     |> Enum.sum()
   end
 
   def part2(input) do
     input
-    |> helper()
-    |> Enum.map(&{elem(&1, 0), Map.to_list(elem(&1, 1))})
-    |> Enum.map(&(Enum.filter(elem(&1, 1), fn {_key, v} -> v == elem(&1, 0) end) |> Enum.count()))
+    |> get_count_frequency()
+    |> Enum.map(&Enum.count(&1, fn x -> x end))
     |> Enum.sum()
   end
 end
