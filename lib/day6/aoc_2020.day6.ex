@@ -1,9 +1,5 @@
 defmodule AOC_2020.Day6 do
-  defp group_by_empty_line(l) do
-    l
-    |> Enum.chunk_by(&(&1 == ""))
-    |> Enum.filter(&(&1 != [""]))
-  end
+  import AOC_2020.Utils
 
   defp get_count_frequency(l) do
     l

@@ -1,4 +1,10 @@
 defmodule AOC_2020.Utils do
+  def group_by_empty_line(l) do
+    l
+    |> Enum.chunk_by(&(&1 == ""))
+    |> Enum.filter(&(&1 != [""]))
+  end
+
   def parse(raw_input), do: raw_input |> Enum.map(&String.to_integer/1)
   def multiply(l), do: l |> Enum.reduce(&(&1 * &2))
 

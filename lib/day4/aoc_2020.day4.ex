@@ -3,8 +3,7 @@ defmodule AOC_2020.Day4 do
 
   def parse_input(l) do
     l
-    |> Enum.chunk_by(&(&1 == ""))
-    |> Enum.filter(&(&1 != [""]))
+    |> group_by_empty_line()
     |> Enum.map(fn x ->
       x
       |> Enum.join(" ")

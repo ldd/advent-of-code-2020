@@ -9,9 +9,10 @@ defmodule AOC_2020Test do
     {454, 649},
     {169, 7_560_370_818},
     {210, 131},
-    {871, 640}
+    {871, 640},
+    {6387, 3039}
   ]
-  @trimmed_days %{4 => true}
+  @trimmed_days %{4 => true, 6 => true}
 
   @expected_results
   |> Enum.with_index()
